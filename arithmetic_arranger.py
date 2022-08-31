@@ -24,6 +24,7 @@ def arithmetic_arranger(problems, answer=False):
         arranged_problems = createLines(maxL, prob[0], prob[1], prob[2])
     return arranged_problems
 
+# Helper function for arithmetic_arranger
 # input maxL: list of lengths of largest operand per problem
 # inputs op1, op, op2, ans: list of first operands, operators, second operands, and answers
 # output: string holding the problems arranged vertically and side-by-side
@@ -32,11 +33,11 @@ def createLines(maxL, op1, op, op2, ans=[]):
     line4 = '\n'
     k=0
     for l in maxL:
-        line1 += ' '*(l-len(op1[k])+2) + op1[k] + ' '*4
-        line2 += op[k] + ' '*(l-len(op2[k])+1)
-        line2 = line2 + op2[k] + ' '*4
+        line1 += op1[k].rjust(l+2, ' ') + ' '*4
+        line2 += op[k] + op2[k].rjust(l+1, ' ') + ' '*4
         line3 += '-'*(l+2) + ' '*4
-        if len(ans) > 1: line4 += ' '*(l-len(str(ans[k]))+2) + str(ans[k]) + ' '*4 # answers
+        if len(ans) > 1: 
+            line4 += str(ans[k]).rjust(l+2, ' ') + ' '*4 # answers
         k = k+1
     # strip extra white space at end and concatentate lines
     lines = line1.rstrip() + '\n' + line2.rstrip() + '\n' + line3.rstrip() + line4.rstrip()
